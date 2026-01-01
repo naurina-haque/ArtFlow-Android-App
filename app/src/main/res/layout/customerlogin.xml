@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#6C179F"
+    tools:context=".CustomerLogin">
+
+    <TextView
+        android:id="@+id/customerTitleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/customer_login"
+        android:textColor="#FFFFFF"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.105" />
+
+    <EditText
+        android:id="@+id/customerEmailEdit"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#D5C5F3"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:padding="16dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#E1BEE7"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.606"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/customerTitleText"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintWidth_percent="0.85" />
+
+    <EditText
+        android:id="@+id/customerPasswordEdit"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#D5C5F3"
+        android:hint="@string/password"
+        android:importantForAutofill="no"
+        android:inputType="textPassword"
+        android:padding="16dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#CCCCCC"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.606"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/customerEmailEdit"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintWidth_percent="0.85" />
+
+    <Button
+        android:id="@+id/customerLoginButton"
+        android:layout_width="160dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="#A37BEA"
+        android:elevation="6dp"
+        android:text="@string/login"
+        android:textColor="#4527A0"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.904"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/customerPasswordEdit"
+        app:strokeWidth="0dp" />
+
+    <Button
+        android:id="@+id/customerBackButton"
+        android:layout_width="160dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="#4B1088"
+        android:text="@string/back"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.147"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/customerPasswordEdit" />
+
+    <TextView
+        android:id="@+id/customerTextViewAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/don_t_have_an_account"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@id/customerSignupText"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/customerLoginButton" />
+
+    <TextView
+        android:id="@+id/customerSignupText"
+        android:layout_width="wrap_content"
+        android:layout_height="27dp"
+        android:layout_marginTop="12dp"
+        android:clickable="true"
+        android:text="@string/sign_up"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/customerTextViewAccount"
+        app:layout_constraintTop_toBottomOf="@+id/customerLoginButton"
+        tools:ignore="TouchTargetSizeCheck" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

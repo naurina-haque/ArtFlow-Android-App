@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#6C179F"
+    android:fillViewport="true"
+    tools:context=".ArtistSignup">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/artistSignupTitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/artist_signup"
+            android:textColor="#FFFFFF"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.168" />
+
+        <EditText
+            android:id="@+id/artistNameEdit"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="#A37BEA"
+            android:hint="Full Name"
+            android:inputType="textPersonName"
+            android:padding="16dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#E1BEE7"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/artistSignupTitleText"
+            app:layout_constraintWidth_percent="0.85" />
+
+        <EditText
+            android:id="@+id/artistEmailEdit"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#A37BEA"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:padding="16dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#E1BEE7"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/artistNameEdit"
+            app:layout_constraintWidth_percent="0.85" />
+
+        <EditText
+            android:id="@+id/artistPasswordEdit"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#A37BEA"
+            android:hint="Password"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:padding="16dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#CCCCCC"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/artistEmailEdit"
+            app:layout_constraintWidth_percent="0.85" />
+
+        <EditText
+            android:id="@+id/artistConfirmPasswordEdit"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#A37BEA"
+            android:hint="Confirm Password"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:padding="16dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#CCCCCC"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/artistPasswordEdit"
+            app:layout_constraintWidth_percent="0.85" />
+
+        <Button
+            android:id="@+id/artistSignupButton"
+            android:layout_width="160dp"
+            android:layout_height="51dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#A37BEA"
+            android:elevation="6dp"
+            android:text="Sign Up"
+            android:textColor="#4527A0"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.88"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/artistConfirmPasswordEdit" />
+
+        <Button
+            android:id="@+id/artistBackButton"
+            android:layout_width="160dp"
+            android:layout_height="51dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#4B1088"
+            android:elevation="6dp"
+            android:text="Back"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.123"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/artistConfirmPasswordEdit" />
+
+        <TextView
+            android:id="@+id/artistTextViewAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="Already have an account?"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@id/artistLoginText"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/artistSignupButton" />
+
+        <TextView
+            android:id="@+id/artistLoginText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:clickable="true"
+            android:text="Login"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/artistTextViewAccount"
+            app:layout_constraintTop_toBottomOf="@id/artistSignupButton" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

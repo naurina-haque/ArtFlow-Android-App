@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#6C179F"
+    tools:context=".ArtistLogin">
+
+    <TextView
+        android:id="@+id/artistTitleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/artist_login"
+        android:textColor="#FFFFFF"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.122" />
+
+    <EditText
+        android:id="@+id/artistEmailEdit"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#A37BEA"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:padding="16dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#E1BEE7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/artistTitleText"
+        app:layout_constraintWidth_percent="0.85" />
+
+    <EditText
+        android:id="@+id/artistPasswordEdit"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#A37BEA"
+        android:hint="Password"
+        android:importantForAutofill="no"
+        android:inputType="textPassword"
+        android:padding="16dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#CCCCCC"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/artistEmailEdit"
+        app:layout_constraintWidth_percent="0.85" />
+
+    <Button
+        android:id="@+id/artistLoginButton"
+        android:layout_width="160dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#A37BEA"
+        android:elevation="6dp"
+        android:text="@string/login"
+        android:textColor="#4527A0"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.88"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/artistPasswordEdit"
+        app:strokeWidth="0dp" />
+
+    <Button
+        android:id="@+id/artistBackButton"
+        android:layout_width="160dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#4B1088"
+        android:text="Back"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.123"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/artistPasswordEdit" />
+
+    <TextView
+        android:id="@+id/artistTextViewAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Don't have an account?"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@id/artistSignupText"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/artistLoginButton" />
+
+    <TextView
+        android:id="@+id/artistSignupText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        android:text="@string/sign_up"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/artistTextViewAccount"
+        app:layout_constraintTop_toBottomOf="@id/artistLoginButton"
+        tools:ignore="TouchTargetSizeCheck" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
