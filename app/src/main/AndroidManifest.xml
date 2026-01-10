@@ -36,6 +36,15 @@
         <activity android:name=".CustomerSignup" android:exported="false" />
 
 
+        <activity android:name=".ArtistDashboard" android:exported="false" />
+
+
+        <activity android:name=".MyArtworksActivity" android:exported="false" />
+
+
+        <activity android:name=".AddArtworkActivity" android:exported="false" />
+
+
     </application>
 
 </manifest>

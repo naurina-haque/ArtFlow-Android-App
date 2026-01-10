@@ -4,156 +4,238 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#6C179F"
     android:fillViewport="true"
     tools:context=".ArtistSignup">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@color/purple_dark"
+        android:padding="24dp">
 
-        <TextView
-            android:id="@+id/artistSignupTitleText"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-medium"
-            android:text="@string/artist_signup"
-            android:textColor="#FFFFFF"
-            android:textSize="32sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.168" />
+            android:padding="24dp">
 
-        <EditText
-            android:id="@+id/artistNameEdit"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="#A37BEA"
-            android:hint="Full Name"
-            android:inputType="textPersonName"
-            android:padding="16dp"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#E1BEE7"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/artistSignupTitleText"
-            app:layout_constraintWidth_percent="0.85" />
+            <TextView
+                android:id="@+id/artistSignupTitleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/artist_signup"
+                android:textColor="@color/white"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/nameInputLayout"
+                android:layout_marginBottom="32dp" />
 
-        <EditText
-            android:id="@+id/artistEmailEdit"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="16dp"
-            android:backgroundTint="#A37BEA"
-            android:hint="Email"
-            android:inputType="textEmailAddress"
-            android:padding="16dp"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#E1BEE7"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/artistNameEdit"
-            app:layout_constraintWidth_percent="0.85" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/nameInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@color/white"
+                app:boxStrokeColor="@color/purple_primary"
+                app:hintTextColor="@color/purple_primary"
+                app:boxCornerRadiusTopStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusBottomEnd="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/artistSignupTitleText"
+                app:layout_constraintBottom_toTopOf="@id/emailInputLayout"
+                app:layout_constraintWidth_percent="0.85">
 
-        <EditText
-            android:id="@+id/artistPasswordEdit"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="16dp"
-            android:backgroundTint="#A37BEA"
-            android:hint="Password"
-            android:importantForAutofill="no"
-            android:inputType="textPassword"
-            android:padding="16dp"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#CCCCCC"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/artistEmailEdit"
-            app:layout_constraintWidth_percent="0.85" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/artistNameEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/white"
+                    android:hint="Full Name"
+                    android:inputType="textPersonName"
+                    android:padding="16dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/gray_dark" />
 
-        <EditText
-            android:id="@+id/artistConfirmPasswordEdit"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="16dp"
-            android:backgroundTint="#A37BEA"
-            android:hint="Confirm Password"
-            android:importantForAutofill="no"
-            android:inputType="textPassword"
-            android:padding="16dp"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#CCCCCC"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/artistPasswordEdit"
-            app:layout_constraintWidth_percent="0.85" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
-            android:id="@+id/artistSignupButton"
-            android:layout_width="160dp"
-            android:layout_height="51dp"
-            android:layout_marginTop="20dp"
-            android:backgroundTint="#A37BEA"
-            android:elevation="6dp"
-            android:text="Sign Up"
-            android:textColor="#4527A0"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.88"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/artistConfirmPasswordEdit" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/emailInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@color/white"
+                app:boxStrokeColor="@color/purple_primary"
+                app:hintTextColor="@color/purple_primary"
+                app:boxCornerRadiusTopStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusBottomEnd="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/nameInputLayout"
+                app:layout_constraintBottom_toTopOf="@id/passwordInputLayout"
+                app:layout_constraintWidth_percent="0.85">
 
-        <Button
-            android:id="@+id/artistBackButton"
-            android:layout_width="160dp"
-            android:layout_height="51dp"
-            android:layout_marginTop="20dp"
-            android:backgroundTint="#4B1088"
-            android:elevation="6dp"
-            android:text="Back"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.123"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/artistConfirmPasswordEdit" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/artistEmailEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/white"
+                    android:hint="Email"
+                    android:inputType="textEmailAddress"
+                    android:padding="16dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/gray_dark" />
 
-        <TextView
-            android:id="@+id/artistTextViewAccount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:text="Already have an account?"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toStartOf="@id/artistLoginText"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/artistSignupButton" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/artistLoginText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:clickable="true"
-            android:text="Login"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/artistTextViewAccount"
-            app:layout_constraintTop_toBottomOf="@id/artistSignupButton" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/passwordInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@color/white"
+                app:boxStrokeColor="@color/purple_primary"
+                app:hintTextColor="@color/purple_primary"
+                app:boxCornerRadiusTopStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusBottomEnd="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/emailInputLayout"
+                app:layout_constraintBottom_toTopOf="@id/confirmPasswordInputLayout"
+                app:layout_constraintWidth_percent="0.85">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/artistPasswordEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/white"
+                    android:hint="Password"
+                    android:importantForAutofill="no"
+                    android:inputType="textPassword"
+                    android:padding="16dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/gray_dark" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/confirmPasswordInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@color/white"
+                app:boxStrokeColor="@color/purple_primary"
+                app:hintTextColor="@color/purple_primary"
+                app:boxCornerRadiusTopStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusBottomEnd="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/passwordInputLayout"
+                app:layout_constraintBottom_toTopOf="@id/buttonLayout"
+                app:layout_constraintWidth_percent="0.85">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/artistConfirmPasswordEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/white"
+                    android:hint="Confirm Password"
+                    android:importantForAutofill="no"
+                    android:inputType="textPassword"
+                    android:padding="16dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/gray_dark" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:id="@+id/buttonLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/confirmPasswordInputLayout"
+                app:layout_constraintWidth_percent="0.85">
+
+                <Button
+                    android:id="@+id/artistBackButton"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:backgroundTint="@color/purple_light"
+                    android:text="Back"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:elevation="8dp"
+                    app:cornerRadius="20dp" />
+
+                <Button
+                    android:id="@+id/artistSignupButton"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:backgroundTint="@color/purple_light"
+                    android:text="Sign Up"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:elevation="8dp"
+                    app:cornerRadius="20dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/buttonLayout"
+                app:layout_constraintWidth_percent="0.85">
+
+                <TextView
+                    android:id="@+id/artistTextViewAccount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Already have an account?"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/artistLoginText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:clickable="true"
+                    android:text="Login"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
 </ScrollView>
