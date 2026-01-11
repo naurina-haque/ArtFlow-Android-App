@@ -7,26 +7,24 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import android.view.Gravity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArtistDashboard extends AppCompatActivity {
+public class ArtistCompletedOrdersActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private ImageView menuIcon;
     private TextView dashboardMenu, myArtworksMenu, ordersMenu, completedOrdersMenu, profileMenu, logoutMenu;
-    private RecyclerView ordersRecyclerView;
-    private OrderAdapter orderAdapter;
+    private RecyclerView completedOrdersRecyclerView;
+    private CompletedOrderAdapter completedOrderAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.artistdashboard);
+        setContentView(R.layout.artistcompletedorders);
 
         // Initialize views
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -37,38 +35,31 @@ public class ArtistDashboard extends AppCompatActivity {
         completedOrdersMenu = findViewById(R.id.completed_orders_menu);
         profileMenu = findViewById(R.id.profile_menu);
         logoutMenu = findViewById(R.id.logout_menu);
-        
-        // Initialize RecyclerView for orders
-        ordersRecyclerView = findViewById(R.id.orders_recycler_view);
-        ordersRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false) {
-            @Override
-            public boolean canScrollVertically() {
-                return false; // Disable vertical scrolling to work with ScrollView
-            }
-        });
-        ordersRecyclerView.setNestedScrollingEnabled(false); // Disable nested scrolling to work with ScrollView
-        
-        // Create sample order data
-        List<Order> sampleOrders = new ArrayList<>();
-        sampleOrders.add(new Order("ORD001", "John Smith", "Abstract Painting", "2023-01-15", "Completed"));
-        sampleOrders.add(new Order("ORD002", "Emma Johnson", "Landscape Art", "2023-01-18", "Pending"));
-        sampleOrders.add(new Order("ORD003", "Michael Brown", "Modern Sculpture", "2023-01-20", "Shipped"));
-        sampleOrders.add(new Order("ORD004", "Sarah Davis", "Watercolor Sunset", "2023-01-22", "Processing"));
-        sampleOrders.add(new Order("ORD005", "Robert Wilson", "Oil Portrait", "2023-01-25", "Cancelled"));
-        sampleOrders.add(new Order("ORD006", "Jennifer Taylor", "Digital Art", "2023-01-28", "Completed"));
-        
-        // Set up adapter
-        orderAdapter = new OrderAdapter(sampleOrders);
-        ordersRecyclerView.setAdapter(orderAdapter);
 
-        // Highlight current page (Dashboard)
-        setActiveMenuItem(dashboardMenu);
+        // Initialize RecyclerView for completed orders
+        completedOrdersRecyclerView = findViewById(R.id.completed_orders_recycler_view);
+        completedOrdersRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // Create sample completed order data
+        List<CompletedOrder> sampleCompletedOrders = new ArrayList<>();
+        sampleCompletedOrders.add(new CompletedOrder("ORD001", "John Smith", "Abstract Painting", "2023-01-15", "Completed"));
+        sampleCompletedOrders.add(new CompletedOrder("ORD003", "Michael Brown", "Modern Sculpture", "2023-01-20", "Completed"));
+        sampleCompletedOrders.add(new CompletedOrder("ORD006", "Jennifer Taylor", "Digital Art", "2023-01-28", "Completed"));
+        sampleCompletedOrders.add(new CompletedOrder("ORD008", "David Wilson", "Watercolor Landscape", "2023-02-05", "Completed"));
+        sampleCompletedOrders.add(new CompletedOrder("ORD010", "Lisa Anderson", "Portrait Art", "2023-02-10", "Completed"));
+
+        // Set up adapter
+        completedOrderAdapter = new CompletedOrderAdapter(sampleCompletedOrders);
+        completedOrdersRecyclerView.setAdapter(completedOrderAdapter);
+
+        // Highlight current page (Completed Orders)
+        setActiveMenuItem(completedOrdersMenu);
 
         // Set click listener for menu icon to open drawer
         menuIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                drawerLayout.openDrawer(Gravity.START);
+                drawerLayout.openDrawer(findViewById(R.id.side_navigation));
             }
         });
 
@@ -76,8 +67,10 @@ public class ArtistDashboard extends AppCompatActivity {
         dashboardMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Stay on the same page (already here)
+                // Navigate to dashboard
                 setActiveMenuItem(dashboardMenu);
+                startActivity(new Intent(ArtistCompletedOrdersActivity.this, ArtistDashboard.class));
+                finish();
                 drawerLayout.closeDrawers();
             }
         });
@@ -85,9 +78,9 @@ public class ArtistDashboard extends AppCompatActivity {
         myArtworksMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Navigate to My Artworks page (you'll need to create this)
+                // Navigate to My Artworks page
                 setActiveMenuItem(myArtworksMenu);
-                startActivity(new Intent(ArtistDashboard.this, MyArtworksActivity.class));
+                startActivity(new Intent(ArtistCompletedOrdersActivity.this, MyArtworksActivity.class));
                 finish();
                 drawerLayout.closeDrawers();
             }
@@ -96,9 +89,11 @@ public class ArtistDashboard extends AppCompatActivity {
         ordersMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Navigate to Orders page (you'll need to create this)
+                // Navigate to Orders page
+                // For now, we'll stay on the current page since OrdersActivity is not implemented
+                // In the future, uncomment when OrdersActivity is created
                 // setActiveMenuItem(ordersMenu);
-                // startActivity(new Intent(ArtistDashboard.this, OrdersActivity.class));
+                // startActivity(new Intent(ArtistCompletedOrdersActivity.this, OrdersActivity.class));
                 drawerLayout.closeDrawers();
             }
         });
@@ -106,10 +101,8 @@ public class ArtistDashboard extends AppCompatActivity {
         completedOrdersMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Navigate to Completed Orders page
+                // Stay on the same page (already here)
                 setActiveMenuItem(completedOrdersMenu);
-                startActivity(new Intent(ArtistDashboard.this, ArtistCompletedOrdersActivity.class));
-                finish();
                 drawerLayout.closeDrawers();
             }
         });
@@ -117,9 +110,9 @@ public class ArtistDashboard extends AppCompatActivity {
         profileMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Navigate to Profile page (you'll need to create this)
+                // Navigate to Profile page
                 // setActiveMenuItem(profileMenu);
-                // startActivity(new Intent(ArtistDashboard.this, ProfileActivity.class));
+                // startActivity(new Intent(ArtistCompletedOrdersActivity.this, ProfileActivity.class));
                 drawerLayout.closeDrawers();
             }
         });
@@ -128,7 +121,7 @@ public class ArtistDashboard extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Navigate back to Select page
-                startActivity(new Intent(ArtistDashboard.this, Select.class));
+                startActivity(new Intent(ArtistCompletedOrdersActivity.this, Select.class));
                 finish();
             }
         });

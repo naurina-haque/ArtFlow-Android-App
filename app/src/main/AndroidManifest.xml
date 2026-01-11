@@ -45,6 +45,9 @@
         <activity android:name=".AddArtworkActivity" android:exported="false" />
 
 
+        <activity android:name=".ArtistCompletedOrdersActivity" android:exported="false" />
+
+
     </application>
 
 </manifest>

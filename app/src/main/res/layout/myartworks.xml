@@ -4,7 +4,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple_primary">
+    android:background="@color/white">
 
     <!-- Main Content Area with Toolbar -->
     <ScrollView
@@ -26,27 +26,35 @@
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp">
 
-                <TextView
-                    android:layout_width="0dp"
+                <ImageView
+android:id="@+id/menu_icon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_menu"
+                    android:layout_gravity="start"
+                    android:layout_marginEnd="16dp" />
+
+<TextView
+                   android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="My ArtWorks"
                     android:textColor="@color/white"
                     android:textSize="20sp"
-                    android:textStyle="bold" />
+                 android:textStyle="bold" />
 
-                <Button
+               <Button
                     android:id="@+id/add_artwork_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="+ ADD ArtWork"
                     android:backgroundTint="@color/white"
-                    android:textColor="@color/purple_primary"
+                   android:textColor="@color/purple_dark"
                     android:layout_marginStart="8dp" />
 
             </LinearLayout>
 
-            <!-- Main Content Area -->
+<!-- Main Content Area -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -54,7 +62,7 @@
                 android:padding="16dp"
                 android:background="@color/white">
 
-                <!-- Search Bar -->
+                <!--Search Bar -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -72,14 +80,14 @@
                         android:layout_marginEnd="8dp" />
 
                     <EditText
-                        android:id="@+id/search_bar"
+                       android:id="@+id/search_bar"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:hint="Search by category, artist name, artwork title..."
                         android:background="@android:color/transparent"
                         android:padding="8dp"
-                        android:maxLines="1" />
+                        android:maxLines="1"/>
 
                 </LinearLayout>
 
@@ -98,26 +106,26 @@
                         <TextView
                             android:id="@+id/chip_all"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+android:layout_height="wrap_content"
                             android:text="All"
-                            android:background="@drawable/chip_background_selected"
+                           android:background="@drawable/chip_background_selected"
                             android:textColor="@color/white"
                             android:paddingHorizontal="16dp"
                             android:paddingVertical="8dp"
                             android:layout_marginEnd="8dp"
-                            android:gravity="center" />
+                           android:gravity="center" />
 
-                        <TextView
+                     <TextView
                             android:id="@+id/chip_colored_portraits"
-                            android:layout_width="wrap_content"
+                           android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Colored Portraits"
                             android:background="@drawable/chip_background"
                             android:textColor="@color/purple_primary"
                             android:paddingHorizontal="16dp"
-                            android:paddingVertical="8dp"
-                            android:layout_marginEnd="8dp"
-                            android:gravity="center" />
+android:paddingVertical="8dp"
+android:layout_marginEnd="8dp"
+                           android:gravity="center" />
 
                         <TextView
                             android:id="@+id/chip_bw_portraits"
@@ -139,9 +147,9 @@
                             android:background="@drawable/chip_background"
                             android:textColor="@color/purple_primary"
                             android:paddingHorizontal="16dp"
-                            android:paddingVertical="8dp"
-                            android:layout_marginEnd="8dp"
-                            android:gravity="center" />
+                         android:paddingVertical="8dp"
+                          android:layout_marginEnd="8dp"
+                           android:gravity="center" />
 
                         <TextView
                             android:id="@+id/chip_digital"
@@ -153,7 +161,7 @@
                             android:paddingHorizontal="16dp"
                             android:paddingVertical="8dp"
                             android:layout_marginEnd="8dp"
-                            android:gravity="center" />
+                           android:gravity="center" />
 
                         <TextView
                             android:id="@+id/chip_abstract"
@@ -164,8 +172,8 @@
                             android:textColor="@color/purple_primary"
                             android:paddingHorizontal="16dp"
                             android:paddingVertical="8dp"
-                            android:layout_marginEnd="8dp"
-                            android:gravity="center" />
+android:layout_marginEnd="8dp"
+                           android:gravity="center" />
 
                         <TextView
                             android:id="@+id/chip_landscape"
@@ -173,11 +181,11 @@
                             android:layout_height="wrap_content"
                             android:text="Landscape Art"
                             android:background="@drawable/chip_background"
-                            android:textColor="@color/purple_primary"
+android:textColor="@color/purple_primary"
                             android:paddingHorizontal="16dp"
                             android:paddingVertical="8dp"
-                            android:layout_marginEnd="8dp"
-                            android:gravity="center" />
+                           android:layout_marginEnd="8dp"
+                           android:gravity="center" />
 
                         <TextView
                             android:id="@+id/chip_line"
@@ -188,8 +196,8 @@
                             android:textColor="@color/purple_primary"
                             android:paddingHorizontal="16dp"
                             android:paddingVertical="8dp"
-                            android:layout_marginEnd="8dp"
-                            android:gravity="center" />
+android:layout_marginEnd="8dp"
+                           android:gravity="center" />
 
                         <TextView
                             android:id="@+id/chip_acrylic"
@@ -201,9 +209,9 @@
                             android:paddingHorizontal="16dp"
                             android:paddingVertical="8dp"
                             android:layout_marginEnd="8dp"
-                            android:gravity="center" />
+                           android:gravity="center" />
 
-                    </LinearLayout>
+              </LinearLayout>
 
                 </HorizontalScrollView>
 
@@ -216,7 +224,7 @@
 
             </LinearLayout>
 
-        </LinearLayout>
+</LinearLayout>
 
     </ScrollView>
 
@@ -227,10 +235,10 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="@color/purple_dark"
-        android:orientation="vertical"
+android:orientation="vertical"
         android:padding="16dp">
 
-        <TextView
+<TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Menu"
@@ -244,18 +252,17 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/purple_light"
-            android:layout_marginBottom="20dp" />
+            android:layout_marginBottom="20dp"/>
 
-        <TextView
-            android:id="@+id/dashboard_menu"
+       <TextViewandroid:id="@+id/dashboard_menu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Dashboard"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:padding="12dp"
-            android:drawableLeft="@drawable/ic_launcher_foreground"
-            android:drawablePadding="10dp"
+android:drawableLeft="@drawable/apps"
+            android:drawablePadding="5dp"
             android:background="?android:attr/selectableItemBackground"
             android:clickable="true"
             android:focusable="true" />
@@ -263,12 +270,12 @@
         <TextView
             android:id="@+id/myartworks_menu"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+           android:layout_height="wrap_content"
             android:text="My Artworks"
-            android:textColor="@color/white"
+android:textColor="@color/white"
             android:textSize="18sp"
             android:padding="12dp"
-            android:drawableLeft="@drawable/ic_launcher_foreground"
+            android:drawableLeft="@drawable/picture"
             android:drawablePadding="10dp"
             android:background="?android:attr/selectableItemBackground"
             android:clickable="true"
@@ -282,7 +289,21 @@
             android:textColor="@color/white"
             android:textSize="18sp"
             android:padding="12dp"
-            android:drawableLeft="@drawable/ic_launcher_foreground"
+            android:drawableLeft="@drawable/orderhistory"
+            android:drawablePadding="10dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <TextView
+            android:id="@+id/completed_orders_menu"
+            android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+            android:text="Completed Orders"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:padding="12dp"
+            android:drawableLeft="@drawable/orderhistory"
             android:drawablePadding="10dp"
             android:background="?android:attr/selectableItemBackground"
             android:clickable="true"
@@ -296,7 +317,7 @@
             android:textColor="@color/white"
             android:textSize="18sp"
             android:padding="12dp"
-            android:drawableLeft="@drawable/ic_launcher_foreground"
+            android:drawableLeft="@drawable/user"
             android:drawablePadding="10dp"
             android:background="?android:attr/selectableItemBackground"
             android:clickable="true"
@@ -310,13 +331,13 @@
             android:textColor="@color/white"
             android:textSize="18sp"
             android:padding="12dp"
-            android:drawableLeft="@drawable/ic_launcher_foreground"
+            android:drawableLeft="@drawable/leave"
             android:drawablePadding="10dp"
             android:layout_marginTop="40dp"
             android:background="?android:attr/selectableItemBackground"
             android:clickable="true"
             android:focusable="true" />
 
-    </LinearLayout>
+</LinearLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>

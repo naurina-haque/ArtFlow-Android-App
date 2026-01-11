@@ -1,9 +1,11 @@
 package com.example.artflow;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -16,7 +18,8 @@ public class MyArtworksActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private Button addArtworkButton;
-    private TextView dashboardMenu, myArtworksMenu, ordersMenu, profileMenu, logoutMenu;
+    private ImageView menuIcon;
+    private TextView dashboardMenu, myArtworksMenu, ordersMenu, completedOrdersMenu, profileMenu, logoutMenu;
     private RecyclerView artworksRecyclerView;
     private ArtworkAdapter artworkAdapter;
 
@@ -28,9 +31,11 @@ public class MyArtworksActivity extends AppCompatActivity {
         // Initialize views
         drawerLayout = findViewById(R.id.drawer_layout);
         addArtworkButton = findViewById(R.id.add_artwork_button);
+        menuIcon = findViewById(R.id.menu_icon);
         dashboardMenu = findViewById(R.id.dashboard_menu);
         myArtworksMenu = findViewById(R.id.myartworks_menu);
         ordersMenu = findViewById(R.id.orders_menu);
+        completedOrdersMenu = findViewById(R.id.completed_orders_menu);
         profileMenu = findViewById(R.id.profile_menu);
         logoutMenu = findViewById(R.id.logout_menu);
 
@@ -43,6 +48,17 @@ public class MyArtworksActivity extends AppCompatActivity {
         // In a real app, this would come from a database or API
         artworkAdapter = new ArtworkAdapter(createSampleArtworks());
         artworksRecyclerView.setAdapter(artworkAdapter);
+
+        // Highlight current page (My Artworks)
+        setActiveMenuItem(myArtworksMenu);
+
+        // Set click listener for menu icon to open drawer
+        menuIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(findViewById(R.id.side_navigation));
+            }
+        });
 
         // Set click listener for add artwork button
         addArtworkButton.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +75,7 @@ public class MyArtworksActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Navigate to dashboard
+                setActiveMenuItem(dashboardMenu);
                 startActivity(new Intent(MyArtworksActivity.this, ArtistDashboard.class));
                 finish();
                 drawerLayout.closeDrawers();
@@ -68,7 +85,8 @@ public class MyArtworksActivity extends AppCompatActivity {
         myArtworksMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Stay on the same page
+                // Stay on the same page (already here)
+                setActiveMenuItem(myArtworksMenu);
                 drawerLayout.closeDrawers();
             }
         });
@@ -77,7 +95,19 @@ public class MyArtworksActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Navigate to orders page (you'll need to create this)
+                // setActiveMenuItem(ordersMenu);
                 // startActivity(new Intent(MyArtworksActivity.this, OrdersActivity.class));
+                drawerLayout.closeDrawers();
+            }
+        });
+
+        completedOrdersMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate to Completed Orders page
+                setActiveMenuItem(completedOrdersMenu);
+                startActivity(new Intent(MyArtworksActivity.this, ArtistCompletedOrdersActivity.class));
+                finish();
                 drawerLayout.closeDrawers();
             }
         });
@@ -86,6 +116,7 @@ public class MyArtworksActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Navigate to Profile page (you'll need to create this)
+                // setActiveMenuItem(profileMenu);
                 // startActivity(new Intent(MyArtworksActivity.this, ProfileActivity.class));
                 drawerLayout.closeDrawers();
             }
@@ -107,22 +138,9 @@ public class MyArtworksActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == ADD_ARTWORK_REQUEST && resultCode == RESULT_OK && data != null) {
-            // Get the new artwork data from the intent
-            String title = data.getStringExtra("artwork_title");
-            String category = data.getStringExtra("artwork_category");
-            String description = data.getStringExtra("artwork_description");
-            String price = data.getStringExtra("artwork_price");
-            String categoryKey = data.getStringExtra("artwork_category_key");
-            
-            // Create new artwork object
-            Artwork newArtwork = new Artwork(title, category, description, price, categoryKey);
-            
-            // Add the new artwork to the adapter
-            artworkAdapter.addArtwork(newArtwork);
-            
-            // Scroll to the top to show the new artwork
-            artworksRecyclerView.smoothScrollToPosition(0);
+        if (requestCode == ADD_ARTWORK_REQUEST && resultCode == RESULT_OK) {
+            // Refresh the artwork list if needed
+            // In a real app, you would add the newly created artwork to the list
         }
     }
 
@@ -167,8 +185,7 @@ public class MyArtworksActivity extends AppCompatActivity {
     private void resetAllChips() {
         String[] chipIds = {
             "chip_all", "chip_colored_portraits", "chip_bw_portraits", 
-            "chip_watercolor", "chip_digital", "chip_abstract", 
-            "chip_landscape", "chip_line", "chip_acrylic"
+            "chip_watercolor", "chip_digital", "chip_abstract", "chip_landscape", "chip_line", "chip_acrylic"
         };
 
         for (String chipId : chipIds) {
@@ -204,5 +221,17 @@ public class MyArtworksActivity extends AppCompatActivity {
         artworks.add(new Artwork("Floral Acrylic", "Acrylic Art", "Beautiful floral painting in acrylic", "$159.99", "acrylic"));
         
         return artworks;
+    }
+    
+    private void setActiveMenuItem(TextView activeMenu) {
+        // Reset all menu items to default color
+        dashboardMenu.setTextColor(Color.WHITE);
+        myArtworksMenu.setTextColor(Color.WHITE);
+        ordersMenu.setTextColor(Color.WHITE);
+        completedOrdersMenu.setTextColor(Color.WHITE);
+        profileMenu.setTextColor(Color.WHITE);
+        
+        // Set active menu item to a different color (highlight it)
+        activeMenu.setTextColor(Color.YELLOW); // Or any other color you prefer for highlighting
     }
 }

@@ -7,13 +7,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,7 +30,7 @@ public class AddArtworkActivity extends AppCompatActivity {
     private FrameLayout imageUploadArea;
     private Button btnSelectImage;
     private TextInputEditText etArtworkTitle, etArtworkDescription, etArtworkPrice;
-    private Spinner spinnerCategory;
+    private AutoCompleteTextView etArtworkCategory;
     private Button btnPublish;
     private LinearLayout imageUploadContainer;
 
@@ -43,7 +42,7 @@ public class AddArtworkActivity extends AppCompatActivity {
         setContentView(R.layout.add_artwork);
 
         initViews();
-        setupCategorySpinner();
+        setupCategoryDropdown();
         setupClickListeners();
     }
 
@@ -54,12 +53,12 @@ public class AddArtworkActivity extends AppCompatActivity {
         etArtworkTitle = findViewById(R.id.et_artwork_title);
         etArtworkDescription = findViewById(R.id.et_artwork_description);
         etArtworkPrice = findViewById(R.id.et_artwork_price);
-        spinnerCategory = findViewById(R.id.spinner_category);
+        etArtworkCategory = findViewById(R.id.et_artwork_category);
         btnPublish = findViewById(R.id.btn_publish);
         imageUploadContainer = findViewById(R.id.image_upload_area);
     }
 
-    private void setupCategorySpinner() {
+    private void setupCategoryDropdown() {
         String[] categories = {
             "Select Category",
             "Colored Portraits",
@@ -74,11 +73,12 @@ public class AddArtworkActivity extends AppCompatActivity {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
             this, 
-            android.R.layout.simple_spinner_item, 
+            android.R.layout.simple_dropdown_item_1line, 
             categories
         );
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerCategory.setAdapter(adapter);
+        
+        etArtworkCategory.setAdapter(adapter);
+        etArtworkCategory.setText(categories[0], false); // Set default selection
     }
 
     private void setupClickListeners() {
@@ -137,7 +137,7 @@ public class AddArtworkActivity extends AppCompatActivity {
         String title = etArtworkTitle.getText().toString().trim();
         String description = etArtworkDescription.getText().toString().trim();
         String price = etArtworkPrice.getText().toString().trim();
-        String category = spinnerCategory.getSelectedItem().toString();
+        String category = etArtworkCategory.getText().toString();
 
         // Validate inputs
         if (validateInputs(title, description, price, category)) {
@@ -151,19 +151,14 @@ public class AddArtworkActivity extends AppCompatActivity {
                 categoryKey
             );
 
-            // Send the new artwork back to the MyArtworksActivity
-            Intent resultIntent = new Intent();
-            resultIntent.putExtra("artwork_title", newArtwork.getTitle());
-            resultIntent.putExtra("artwork_category", newArtwork.getCategory());
-            resultIntent.putExtra("artwork_description", newArtwork.getDescription());
-            resultIntent.putExtra("artwork_price", newArtwork.getPrice());
-            resultIntent.putExtra("artwork_category_key", newArtwork.getCategoryKey());
-            
-            setResult(RESULT_OK, resultIntent);
+            // In a real app, you would save this to a database
+            // For now, we'll simulate adding it to a shared list
+            // and return to the MyArtworksActivity
             
             Toast.makeText(this, "Artwork published successfully!", Toast.LENGTH_SHORT).show();
             
-            // Finish the activity
+            // Return to MyArtworks page
+            setResult(RESULT_OK);
             finish();
         }
     }

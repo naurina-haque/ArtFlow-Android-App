@@ -10,9 +10,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center"
         android:background="@color/purple_dark"
+        android:gravity="center"
+        android:orientation="vertical"
         android:padding="24dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,16 +24,16 @@
                 android:id="@+id/artistSignupTitleText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
                 android:fontFamily="sans-serif-medium"
                 android:text="@string/artist_signup"
                 android:textColor="@color/white"
                 android:textSize="28sp"
                 android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/nameInputLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/nameInputLayout"
-                android:layout_marginBottom="32dp" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/nameInputLayout"
@@ -41,16 +41,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:background="@color/white"
+                app:boxCornerRadiusBottomEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusTopStart="20dp"
                 app:boxStrokeColor="@color/purple_primary"
                 app:hintTextColor="@color/purple_primary"
-                app:boxCornerRadiusTopStart="20dp"
-                app:boxCornerRadiusTopEnd="20dp"
-                app:boxCornerRadiusBottomStart="20dp"
-                app:boxCornerRadiusBottomEnd="20dp"
+                app:layout_constraintBottom_toTopOf="@id/emailInputLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/artistSignupTitleText"
-                app:layout_constraintBottom_toTopOf="@id/emailInputLayout"
                 app:layout_constraintWidth_percent="0.85">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -72,16 +72,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:background="@color/white"
+                app:boxCornerRadiusBottomEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusTopStart="20dp"
                 app:boxStrokeColor="@color/purple_primary"
                 app:hintTextColor="@color/purple_primary"
-                app:boxCornerRadiusTopStart="20dp"
-                app:boxCornerRadiusTopEnd="20dp"
-                app:boxCornerRadiusBottomStart="20dp"
-                app:boxCornerRadiusBottomEnd="20dp"
+                app:layout_constraintBottom_toTopOf="@id/passwordInputLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/nameInputLayout"
-                app:layout_constraintBottom_toTopOf="@id/passwordInputLayout"
                 app:layout_constraintWidth_percent="0.85">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -103,16 +103,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:background="@color/white"
+                app:boxCornerRadiusBottomEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusTopStart="20dp"
                 app:boxStrokeColor="@color/purple_primary"
                 app:hintTextColor="@color/purple_primary"
-                app:boxCornerRadiusTopStart="20dp"
-                app:boxCornerRadiusTopEnd="20dp"
-                app:boxCornerRadiusBottomStart="20dp"
-                app:boxCornerRadiusBottomEnd="20dp"
+                app:layout_constraintBottom_toTopOf="@id/confirmPasswordInputLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/emailInputLayout"
-                app:layout_constraintBottom_toTopOf="@id/confirmPasswordInputLayout"
                 app:layout_constraintWidth_percent="0.85">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -135,16 +135,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:background="@color/white"
+                app:boxCornerRadiusBottomEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusTopStart="20dp"
                 app:boxStrokeColor="@color/purple_primary"
                 app:hintTextColor="@color/purple_primary"
-                app:boxCornerRadiusTopStart="20dp"
-                app:boxCornerRadiusTopEnd="20dp"
-                app:boxCornerRadiusBottomStart="20dp"
-                app:boxCornerRadiusBottomEnd="20dp"
+                app:layout_constraintBottom_toTopOf="@id/buttonLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/passwordInputLayout"
-                app:layout_constraintBottom_toTopOf="@id/buttonLayout"
                 app:layout_constraintWidth_percent="0.85">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -165,8 +165,8 @@
                 android:id="@+id/buttonLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginTop="32dp"
+                android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/confirmPasswordInputLayout"
@@ -176,28 +176,28 @@
                     android:id="@+id/artistBackButton"
                     android:layout_width="0dp"
                     android:layout_height="60dp"
-                    android:layout_weight="1"
                     android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
                     android:backgroundTint="@color/purple_light"
+                    android:elevation="8dp"
                     android:text="Back"
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:elevation="8dp"
                     app:cornerRadius="20dp" />
 
                 <Button
                     android:id="@+id/artistSignupButton"
                     android:layout_width="0dp"
                     android:layout_height="60dp"
-                    android:layout_weight="1"
                     android:layout_marginStart="8dp"
+                    android:layout_weight="1"
                     android:backgroundTint="@color/purple_light"
+                    android:elevation="8dp"
                     android:text="Sign Up"
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:elevation="8dp"
                     app:cornerRadius="20dp" />
 
             </LinearLayout>
@@ -205,9 +205,9 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
                 android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/buttonLayout"

@@ -26,9 +26,8 @@ public class CustomerLogin extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // For now, just navigate to the Select page
-                // In a real app, you would implement actual login logic here
-                startActivity(new Intent(CustomerLogin.this, Select.class));
+                // Navigate to the Artist Dashboard
+                startActivity(new Intent(CustomerLogin.this, ArtistDashboard.class));
                 finish();
             }
         });

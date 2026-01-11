@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <!-- Main Content Area with Toolbar -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Toolbar/Header -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/purple_dark"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp">
+
+                <ImageView
+                    android:id="@+id/menu_icon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_menu"
+                    android:layout_gravity="start"
+                   android:layout_marginEnd="16dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Artist Completed Orders"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <!-- Main Content Area -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:background="@color/white">
+
+                <!-- Orders Table Section -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Completed Orders"
+                    android:textColor="@color/purple_primary"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:padding="16dp"
+                    android:gravity="center" />
+
+                <!-- Table Header -->
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+android:layout_marginBottom="4dp"
+                    android:scrollbars="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:background="@color/purple_primary"
+                        android:elevation="4dp">
+
+<TextView
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:padding="12dp"
+                            android:text="Order ID"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:gravity="center_vertical"
+                           android:layout_gravity="center_vertical" />
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/white" />
+
+                        <TextView
+                            android:layout_width="140dp"
+                            android:layout_height="wrap_content"
+                            android:padding="12dp"
+                            android:text="Customer Name"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:gravity="center_vertical"
+                            android:layout_gravity="center_vertical" />
+
+                        <View
+                            android:layout_width="1dp"
+android:layout_height="match_parent"
+                            android:background="@color/white" />
+
+                        <TextView
+                            android:layout_width="160dp"
+                            android:layout_height="wrap_content"
+                            android:padding="12dp"
+                            android:text="Artwork Title"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:gravity="center_vertical"
+                            android:layout_gravity="center_vertical" />
+
+                       <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/white" />
+
+                        <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:padding="12dp"
+                            android:text="Ordered On"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:gravity="center_vertical"
+                            android:layout_gravity="center_vertical" />
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/white" />
+
+                        <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:padding="12dp"
+                            android:text="Status"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:gravity="center_vertical"
+                            android:layout_gravity="center_vertical" />
+
+                    </LinearLayout>
+
+                </HorizontalScrollView>
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:scrollbars="horizontal">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/completed_orders_recycler_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false" />
+
+                </HorizontalScrollView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!-- Navigation Sidebar -->
+    <LinearLayout
+        android:id="@+id/side_navigation"
+        android:layout_width="250dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/purple_dark"
+       android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Menu"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:paddingBottom="20dp"
+            android:gravity="center" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/purple_light"
+            android:layout_marginBottom="20dp" />
+
+<TextView
+            android:id="@+id/dashboard_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dashboard"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:padding="12dp"
+           android:drawableLeft="@drawable/apps"
+            android:drawablePadding="10dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <TextView
+            android:id="@+id/myartworks_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="My Artworks"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:padding="12dp"
+            android:drawableLeft="@drawable/picture"
+            android:drawablePadding="10dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <TextView
+            android:id="@+id/orders_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+android:text="Orders"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:padding="12dp"
+            android:drawableLeft="@drawable/orderhistory"
+            android:drawablePadding="10dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <TextView
+            android:id="@+id/completed_orders_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Completed Orders"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:padding="12dp"
+            android:drawableLeft="@drawable/orderhistory"
+            android:drawablePadding="10dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <TextView
+            android:id="@+id/profile_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Profile"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:padding="12dp"
+            android:drawableLeft="@drawable/user"
+            android:drawablePadding="10dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <TextView
+            android:id="@+id/logout_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:padding="12dp"
+            android:drawableLeft="@drawable/leave"
+            android:drawablePadding="5dp"
+            android:layout_marginTop="40dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true" />
+
+    </LinearLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>

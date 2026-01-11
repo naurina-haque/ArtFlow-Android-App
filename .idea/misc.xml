@@ -10,14 +10,16 @@
         <entry key="..\:/Users/Dell/ArtFlow/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2203125" />
         <entry key="..\:/Users/Dell/ArtFlow/app/src/main/res/drawable/ic_menu.xml" value="0.2203125" />
         <entry key="..\:/Users/Dell/ArtFlow/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="..\:/Users/Dell/ArtFlow/app/src/main/res/layout/add_artwork.xml" value="0.25" />
+        <entry key="..\:/Users/Dell/ArtFlow/app/src/main/res/layout/add_artwork.xml" value="0.13507625272331156" />
+        <entry key="..\:/Users/Dell/ArtFlow/app/src/main/res/layout/artistcompletedorders.xml" value="0.17415730337078653" />
         <entry key="..\:/Users/Dell/ArtFlow/app/src/main/res/layout/artistdashboard.xml" value="0.22" />
         <entry key="..\:/Users/Dell/ArtFlow/app/src/main/res/layout/artistlogin.xml" value="0.22" />
         <entry key="..\:/Users/Dell/ArtFlow/app/src/main/res/layout/artistsignup.xml" value="0.22" />
         <entry key="..\:/Users/Dell/ArtFlow/app/src/main/res/layout/artwork_item.xml" value="0.25" />
+        <entry key="..\:/Users/Dell/ArtFlow/app/src/main/res/layout/completed_order_item.xml" value="0.14447463768115942" />
         <entry key="..\:/Users/Dell/ArtFlow/app/src/main/res/layout/customerlogin.xml" value="0.22" />
         <entry key="..\:/Users/Dell/ArtFlow/app/src/main/res/layout/customersignup.xml" value="0.22" />
-        <entry key="..\:/Users/Dell/ArtFlow/app/src/main/res/layout/myartworks.xml" value="0.33" />
+        <entry key="..\:/Users/Dell/ArtFlow/app/src/main/res/layout/myartworks.xml" value="0.18" />
         <entry key="..\:/Users/Dell/ArtFlow/app/src/main/res/layout/order_item.xml" value="0.22" />
         <entry key="..\:/Users/Dell/ArtFlow/app/src/main/res/layout/select.xml" value="0.25" />
         <entry key="..\:/Users/Dell/ArtFlow/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.17552083333333332" />
