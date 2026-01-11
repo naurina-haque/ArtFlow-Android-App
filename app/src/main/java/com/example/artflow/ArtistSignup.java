@@ -10,16 +10,26 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
 public class ArtistSignup extends AppCompatActivity {
 
     private EditText nameEditText, emailEditText, passwordEditText, confirmPasswordEditText;
     private Button signupButton, backButton;
     private TextView loginTextView;
+    
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.artistsignup);
+        
+        // Initialize Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
 
         // Initialize UI components
         nameEditText = findViewById(R.id.artistNameEdit);
@@ -87,10 +97,19 @@ public class ArtistSignup extends AppCompatActivity {
             return;
         }
 
-        // For now, just show a success message and navigate to the Select page
-        // In a real app, you would implement actual signup logic here
-        Toast.makeText(this, "Artist account created successfully!", Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(ArtistSignup.this, Select.class));
-        finish();
+        // Create user with email and password using Firebase
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        // Sign up success, update UI with logged-in user's information
+                        Toast.makeText(ArtistSignup.this, "Registration successful.", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(ArtistSignup.this, Select.class));
+                        finish();
+                    } else {
+                        // If sign up fails, display a message to the user.
+                        Toast.makeText(ArtistSignup.this, "Registration failed: " + task.getException().getMessage(),
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 }

@@ -6,13 +6,27 @@ public class Order {
     private String artworkTitle;
     private String orderedOn;
     private String status;
+    private String artistId;
 
+    public Order() {
+        // Default constructor required for calls to DataSnapshot.getValue(Order.class)
+    }
+    
     public Order(String orderId, String customerName, String artworkTitle, String orderedOn, String status) {
         this.orderId = orderId;
         this.customerName = customerName;
         this.artworkTitle = artworkTitle;
         this.orderedOn = orderedOn;
         this.status = status;
+    }
+    
+    public Order(String orderId, String customerName, String artworkTitle, String orderedOn, String status, String artistId) {
+        this.orderId = orderId;
+        this.customerName = customerName;
+        this.artworkTitle = artworkTitle;
+        this.orderedOn = orderedOn;
+        this.status = status;
+        this.artistId = artistId;
     }
 
     // Getters
@@ -35,6 +49,10 @@ public class Order {
     public String getStatus() {
         return status;
     }
+    
+    public String getArtistId() {
+        return artistId;
+    }
 
     // Setters
     public void setOrderId(String orderId) {
@@ -55,5 +73,9 @@ public class Order {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+    
+    public void setArtistId(String artistId) {
+        this.artistId = artistId;
     }
 }

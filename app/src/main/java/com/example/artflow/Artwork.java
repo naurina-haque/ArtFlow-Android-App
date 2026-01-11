@@ -1,21 +1,33 @@
 package com.example.artflow;
 
 public class Artwork {
+    private String id;
     private String title;
     private String category;
     private String description;
     private String price;
     private String categoryKey; // Used for filtering
+    private String artistId;
 
-    public Artwork(String title, String category, String description, String price, String categoryKey) {
+    public Artwork() {
+        // Default constructor required for calls to DataSnapshot.getValue(Artwork.class)
+    }
+    
+    public Artwork(String id, String title, String category, String description, String price, String categoryKey, String artistId) {
+        this.id = id;
         this.title = title;
         this.category = category;
         this.description = description;
         this.price = price;
         this.categoryKey = categoryKey;
+        this.artistId = artistId;
     }
 
     // Getters
+    public String getId() {
+        return id;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -35,8 +47,16 @@ public class Artwork {
     public String getCategoryKey() {
         return categoryKey;
     }
+    
+    public String getArtistId() {
+        return artistId;
+    }
 
     // Setters
+    public void setId(String id) {
+        this.id = id;
+    }
+    
     public void setTitle(String title) {
         this.title = title;
     }
@@ -55,5 +75,9 @@ public class Artwork {
 
     public void setCategoryKey(String categoryKey) {
         this.categoryKey = categoryKey;
+    }
+    
+    public void setArtistId(String artistId) {
+        this.artistId = artistId;
     }
 }

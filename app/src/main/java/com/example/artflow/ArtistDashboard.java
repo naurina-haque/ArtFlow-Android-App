@@ -12,6 +12,14 @@ import android.view.Gravity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,11 +30,19 @@ public class ArtistDashboard extends AppCompatActivity {
     private TextView dashboardMenu, myArtworksMenu, ordersMenu, completedOrdersMenu, profileMenu, logoutMenu;
     private RecyclerView ordersRecyclerView;
     private OrderAdapter orderAdapter;
+    
+    // Firebase variables
+    private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.artistdashboard);
+        
+        // Initialize Firebase
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance("https://artflow-55038-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference();
 
         // Initialize views
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -48,18 +64,8 @@ public class ArtistDashboard extends AppCompatActivity {
         });
         ordersRecyclerView.setNestedScrollingEnabled(false); // Disable nested scrolling to work with ScrollView
         
-        // Create sample order data
-        List<Order> sampleOrders = new ArrayList<>();
-        sampleOrders.add(new Order("ORD001", "John Smith", "Abstract Painting", "2023-01-15", "Completed"));
-        sampleOrders.add(new Order("ORD002", "Emma Johnson", "Landscape Art", "2023-01-18", "Pending"));
-        sampleOrders.add(new Order("ORD003", "Michael Brown", "Modern Sculpture", "2023-01-20", "Shipped"));
-        sampleOrders.add(new Order("ORD004", "Sarah Davis", "Watercolor Sunset", "2023-01-22", "Processing"));
-        sampleOrders.add(new Order("ORD005", "Robert Wilson", "Oil Portrait", "2023-01-25", "Cancelled"));
-        sampleOrders.add(new Order("ORD006", "Jennifer Taylor", "Digital Art", "2023-01-28", "Completed"));
-        
-        // Set up adapter
-        orderAdapter = new OrderAdapter(sampleOrders);
-        ordersRecyclerView.setAdapter(orderAdapter);
+        // Load orders from Firebase
+        loadOrdersFromFirebase();
 
         // Highlight current page (Dashboard)
         setActiveMenuItem(dashboardMenu);
@@ -132,6 +138,49 @@ public class ArtistDashboard extends AppCompatActivity {
                 finish();
             }
         });
+    }
+    
+    private void loadOrdersFromFirebase() {
+        // Get the current user's ID to load their specific orders
+        String currentUserId = mAuth.getCurrentUser() != null ? mAuth.getCurrentUser().getUid() : null;
+        
+        if (currentUserId != null) {
+            // Reference to orders for the current artist
+            DatabaseReference ordersRef = mDatabase.child("orders").orderByChild("artistId").equalTo(currentUserId);
+            
+            ordersRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    List<Order> ordersList = new ArrayList<>();
+                    
+                    for (DataSnapshot orderSnapshot : dataSnapshot.getChildren()) {
+                        Order order = orderSnapshot.getValue(Order.class);
+                        if (order != null) {
+                            ordersList.add(order);
+                        }
+                    }
+                    
+                    // Update the adapter with the loaded orders
+                    if (orderAdapter == null) {
+                        orderAdapter = new OrderAdapter(ordersList);
+                        ordersRecyclerView.setAdapter(orderAdapter);
+                    } else {
+                        orderAdapter.notifyDataSetChanged();
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    // Handle possible errors
+                    System.out.println("loadOrders:onCancelled " + databaseError.toException());
+                }
+            });
+        } else {
+            // If user is not authenticated, create an empty list
+            List<Order> emptyOrdersList = new ArrayList<>();
+            orderAdapter = new OrderAdapter(emptyOrdersList);
+            ordersRecyclerView.setAdapter(orderAdapter);
+        }
     }
     
     private void setActiveMenuItem(TextView activeMenu) {
