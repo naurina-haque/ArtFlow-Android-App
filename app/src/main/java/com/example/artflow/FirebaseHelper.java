@@ -94,8 +94,8 @@ public class FirebaseHelper {
     // Method to save artwork data to Realtime Database
     public void saveArtworkData(String artworkId, String artistId, String title, String description, String price) {
         DatabaseReference artworksRef = mDatabase.child("artworks").child(artworkId);
-        
-        Artwork artwork = new Artwork(artworkId, title, "", description, price, "", artistId);
+
+        Artwork artwork = new Artwork(artworkId, title, "", description, price, "", artistId, "");
         artworksRef.setValue(artwork);
     }
     

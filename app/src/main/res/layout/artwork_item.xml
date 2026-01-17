@@ -4,6 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="6dp"
+    android:background="@color/white"
+    app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="12dp"
     app:cardElevation="6dp">
 
@@ -69,28 +71,42 @@
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
+        </LinearLayout>
+
+        <!-- Buttons container -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end"
+            android:layout_marginTop="8dp">
+
+            <!-- Buy Button - Shown in customer view -->
             <Button
-                android:id="@+id/edit_button"
+                android:id="@+id/buy_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Edit"
+                android:layout_marginStart="4dp"
                 android:backgroundTint="@color/purple_primary"
-                android:textColor="@color/white"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="4dp"
-                android:layout_marginEnd="4dp"
-                android:textSize="10sp" />
+                android:text="Buy"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                android:visibility="gone" />
 
+            <!-- Delete Button - Shown in artist view -->
             <Button
                 android:id="@+id/delete_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Del"
                 android:backgroundTint="#F44336"
-                android:textColor="@color/white"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="4dp"
-                android:textSize="10sp" />
+                android:text="Delete"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                android:visibility="visible" />
 
         </LinearLayout>
 

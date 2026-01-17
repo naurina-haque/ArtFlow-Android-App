@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.artflow">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Storage permissions for image selection -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 
     <application
         android:name=".FirebaseUtil"
@@ -48,6 +51,13 @@
 
         <activity android:name=".ArtistCompletedOrdersActivity" android:exported="false" />
 
+        <activity android:name=".CustomerDashboard" android:exported="false" />
+        
+        <activity android:name=".CustomerMyOrdersActivity" android:exported="false" />
+        
+        <activity android:name=".ProfileActivity" android:exported="false" />
+        
+        <activity android:name=".ChangePasswordActivity" android:exported="false" />
 
     </application>
 

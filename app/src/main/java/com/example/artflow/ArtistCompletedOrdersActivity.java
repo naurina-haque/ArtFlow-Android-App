@@ -7,9 +7,19 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import android.view.Gravity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,12 +29,21 @@ public class ArtistCompletedOrdersActivity extends AppCompatActivity {
     private ImageView menuIcon;
     private TextView dashboardMenu, myArtworksMenu, ordersMenu, completedOrdersMenu, profileMenu, logoutMenu;
     private RecyclerView completedOrdersRecyclerView;
-    private CompletedOrderAdapter completedOrderAdapter;
+    private OrderAdapter completedOrderAdapter; // Changed to use OrderAdapter
+    private List<Order> completedOrdersList; // Changed to use Order instead of CompletedOrder
+    
+    // Firebase variables
+    private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.artistcompletedorders);
+        
+        // Initialize Firebase
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance("https://artflow-55038-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference();
 
         // Initialize views
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -35,22 +54,23 @@ public class ArtistCompletedOrdersActivity extends AppCompatActivity {
         completedOrdersMenu = findViewById(R.id.completed_orders_menu);
         profileMenu = findViewById(R.id.profile_menu);
         logoutMenu = findViewById(R.id.logout_menu);
-
+        
         // Initialize RecyclerView for completed orders
         completedOrdersRecyclerView = findViewById(R.id.completed_orders_recycler_view);
-        completedOrdersRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        completedOrdersRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false) {
+            @Override
+            public boolean canScrollVertically() {
+                return false; // Disable vertical scrolling to work with ScrollView
+            }
+        });
+        completedOrdersRecyclerView.setNestedScrollingEnabled(false); // Disable nested scrolling to work with ScrollView
+        
+        // Initialize completed orders list
+        final List<Order> completedOrdersList = new ArrayList<>();
+        this.completedOrdersList = completedOrdersList;
 
-        // Create sample completed order data
-        List<CompletedOrder> sampleCompletedOrders = new ArrayList<>();
-        sampleCompletedOrders.add(new CompletedOrder("ORD001", "John Smith", "Abstract Painting", "2023-01-15", "Completed"));
-        sampleCompletedOrders.add(new CompletedOrder("ORD003", "Michael Brown", "Modern Sculpture", "2023-01-20", "Completed"));
-        sampleCompletedOrders.add(new CompletedOrder("ORD006", "Jennifer Taylor", "Digital Art", "2023-01-28", "Completed"));
-        sampleCompletedOrders.add(new CompletedOrder("ORD008", "David Wilson", "Watercolor Landscape", "2023-02-05", "Completed"));
-        sampleCompletedOrders.add(new CompletedOrder("ORD010", "Lisa Anderson", "Portrait Art", "2023-02-10", "Completed"));
-
-        // Set up adapter
-        completedOrderAdapter = new CompletedOrderAdapter(sampleCompletedOrders);
-        completedOrdersRecyclerView.setAdapter(completedOrderAdapter);
+        // Load completed orders from Firebase
+        loadCompletedOrdersFromFirebase();
 
         // Highlight current page (Completed Orders)
         setActiveMenuItem(completedOrdersMenu);
@@ -59,7 +79,7 @@ public class ArtistCompletedOrdersActivity extends AppCompatActivity {
         menuIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                drawerLayout.openDrawer(findViewById(R.id.side_navigation));
+                drawerLayout.openDrawer(Gravity.START);
             }
         });
 
@@ -90,8 +110,6 @@ public class ArtistCompletedOrdersActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Navigate to Orders page
-                // For now, we'll stay on the current page since OrdersActivity is not implemented
-                // In the future, uncomment when OrdersActivity is created
                 // setActiveMenuItem(ordersMenu);
                 // startActivity(new Intent(ArtistCompletedOrdersActivity.this, OrdersActivity.class));
                 drawerLayout.closeDrawers();
@@ -111,8 +129,8 @@ public class ArtistCompletedOrdersActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Navigate to Profile page
-                // setActiveMenuItem(profileMenu);
-                // startActivity(new Intent(ArtistCompletedOrdersActivity.this, ProfileActivity.class));
+                setActiveMenuItem(profileMenu);
+                startActivity(new Intent(ArtistCompletedOrdersActivity.this, ProfileActivity.class));
                 drawerLayout.closeDrawers();
             }
         });
@@ -125,6 +143,52 @@ public class ArtistCompletedOrdersActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+    
+    private void loadCompletedOrdersFromFirebase() {
+        // Get the current user's ID to load their specific orders
+        String currentUserId = mAuth.getCurrentUser() != null ? mAuth.getCurrentUser().getUid() : null;
+        
+        if (currentUserId != null) {
+            // Reference to completed orders for the current artist
+            mDatabase.child("orders").orderByChild("artistId").equalTo(currentUserId)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        completedOrdersList.clear();
+                        
+                        for (DataSnapshot orderSnapshot : dataSnapshot.getChildren()) {
+                            Order order = orderSnapshot.getValue(Order.class);
+                            if (order != null && ("Completed".equals(order.getStatus()) || "Rejected".equals(order.getStatus()))) { // Only load completed or rejected orders
+                                completedOrdersList.add(order);
+                            }
+                        }
+                        
+                        // Update the adapter with the loaded completed orders
+                        if (completedOrderAdapter == null) {
+                            completedOrderAdapter = new OrderAdapter(completedOrdersList);
+                            completedOrdersRecyclerView.setAdapter(completedOrderAdapter);
+                        } else {
+                            completedOrderAdapter.notifyDataSetChanged();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        // Handle possible errors
+                        System.out.println("loadCompletedOrders:onCancelled " + databaseError.toException());
+                    }
+                });
+        } else {
+            // If user is not authenticated, clear the list
+            completedOrdersList.clear();
+            if (completedOrderAdapter == null) {
+                completedOrderAdapter = new OrderAdapter(completedOrdersList);
+                completedOrdersRecyclerView.setAdapter(completedOrderAdapter);
+            } else {
+                completedOrderAdapter.notifyDataSetChanged();
+            }
+        }
     }
     
     private void setActiveMenuItem(TextView activeMenu) {

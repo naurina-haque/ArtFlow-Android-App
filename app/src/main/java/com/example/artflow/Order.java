@@ -2,31 +2,31 @@ package com.example.artflow;
 
 public class Order {
     private String orderId;
-    private String customerName;
-    private String artworkTitle;
-    private String orderedOn;
-    private String status;
+    private String customerId;
+    private String customerName; // Added to store customer's name
     private String artistId;
+    private String artistName; // Added to store artist's name
+    private String artworkId;
+    private String artworkTitle;
+    private String artworkImageUrl;
+    private String status; // "Pending", "Accepted", "Rejected", "Completed"
+    private String timestamp;
 
     public Order() {
-        // Default constructor required for calls to DataSnapshot.getValue(Order.class)
+        // Default constructor required for Firebase
     }
-    
-    public Order(String orderId, String customerName, String artworkTitle, String orderedOn, String status) {
+
+    public Order(String orderId, String customerId, String customerName, String artistId, String artistName, String artworkId, String artworkTitle, String artworkImageUrl, String status, String timestamp) {
         this.orderId = orderId;
+        this.customerId = customerId;
         this.customerName = customerName;
-        this.artworkTitle = artworkTitle;
-        this.orderedOn = orderedOn;
-        this.status = status;
-    }
-    
-    public Order(String orderId, String customerName, String artworkTitle, String orderedOn, String status, String artistId) {
-        this.orderId = orderId;
-        this.customerName = customerName;
-        this.artworkTitle = artworkTitle;
-        this.orderedOn = orderedOn;
-        this.status = status;
         this.artistId = artistId;
+        this.artistName = artistName;
+        this.artworkId = artworkId;
+        this.artworkTitle = artworkTitle;
+        this.artworkImageUrl = artworkImageUrl;
+        this.status = status;
+        this.timestamp = timestamp;
     }
 
     // Getters
@@ -34,24 +34,40 @@ public class Order {
         return orderId;
     }
 
+    public String getCustomerId() {
+        return customerId;
+    }
+
     public String getCustomerName() {
         return customerName;
+    }
+
+    public String getArtistId() {
+        return artistId;
+    }
+
+    public String getArtistName() {
+        return artistName;
+    }
+
+    public String getArtworkId() {
+        return artworkId;
     }
 
     public String getArtworkTitle() {
         return artworkTitle;
     }
 
-    public String getOrderedOn() {
-        return orderedOn;
+    public String getArtworkImageUrl() {
+        return artworkImageUrl;
     }
 
     public String getStatus() {
         return status;
     }
-    
-    public String getArtistId() {
-        return artistId;
+
+    public String getTimestamp() {
+        return timestamp;
     }
 
     // Setters
@@ -59,23 +75,39 @@ public class Order {
         this.orderId = orderId;
     }
 
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
+    }
+
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
+    }
+
+    public void setArtistId(String artistId) {
+        this.artistId = artistId;
+    }
+
+    public void setArtistName(String artistName) {
+        this.artistName = artistName;
+    }
+
+    public void setArtworkId(String artworkId) {
+        this.artworkId = artworkId;
     }
 
     public void setArtworkTitle(String artworkTitle) {
         this.artworkTitle = artworkTitle;
     }
 
-    public void setOrderedOn(String orderedOn) {
-        this.orderedOn = orderedOn;
+    public void setArtworkImageUrl(String artworkImageUrl) {
+        this.artworkImageUrl = artworkImageUrl;
     }
 
     public void setStatus(String status) {
         this.status = status;
     }
-    
-    public void setArtistId(String artistId) {
-        this.artistId = artistId;
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
     }
 }

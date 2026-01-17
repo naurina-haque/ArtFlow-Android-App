@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="artwork_categories">
+        <item>Select Category</item>
+        <item>Colored Portraits</item>
+        <item>B&amp;W Portraits</item>
+        <item>Watercolor Art</item>
+        <item>Digital Art</item>
+        <item>Abstract Art</item>
+        <item>Landscape Art</item>
+        <item>Line Art</item>
+        <item>Acrylic Art</item>
+    </string-array>
+</resources>

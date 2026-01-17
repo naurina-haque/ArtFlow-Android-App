@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -31,21 +32,21 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@drawable/ic_menu"
-                    android:contentDescription="@string/menu"
                     android:layout_gravity="start"
-                    android:layout_marginEnd="16dp"/>
+                    android:layout_marginEnd="16dp" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/artist_completed_orders"
+                    android:text="My Orders"
                     android:textColor="@color/white"
                     android:textSize="20sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
+
             </LinearLayout>
 
-            <!-- Main Content -->
+            <!-- Main Content Area -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -53,27 +54,17 @@
                 android:padding="16dp"
                 android:background="@color/white">
 
-                <!-- Completed Orders Section -->
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/completed_orders"
-                    android:textColor="@color/purple_primary"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:padding="16dp"
-                    android:gravity="center"/>
-
-                <!-- RecyclerView for Completed Orders -->
+                <!-- Orders RecyclerView -->
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/completed_orders_recycler_view"
+                    android:id="@+id/orders_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:nestedScrollingEnabled="false"/>
+                    android:layout_marginTop="8dp" />
+
             </LinearLayout>
+
         </LinearLayout>
+
     </ScrollView>
 
     <!-- Navigation Sidebar -->
@@ -94,7 +85,7 @@
             android:textSize="24sp"
             android:textStyle="bold"
             android:paddingBottom="20dp"
-            android:gravity="center"/>
+            android:gravity="center" />
 
         <View
             android:layout_width="match_parent"
@@ -102,7 +93,6 @@
             android:background="@color/purple_light"
             android:layout_marginBottom="20dp"/>
 
-        <!-- Drawer Menu Items -->
         <TextView
             android:id="@+id/dashboard_menu"
             android:layout_width="match_parent"
@@ -113,43 +103,19 @@
             android:padding="12dp"
             android:background="?android:attr/selectableItemBackground"
             android:clickable="true"
-            android:focusable="true"/>
+            android:focusable="true" />
 
         <TextView
-            android:id="@+id/myartworks_menu"
+            android:id="@+id/my_orders_menu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/my_artworks"
+            android:text="My Orders"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:padding="12dp"
             android:background="?android:attr/selectableItemBackground"
             android:clickable="true"
-            android:focusable="true"/>
-
-        <TextView
-            android:id="@+id/orders_menu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/orders_label"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:padding="12dp"
-            android:background="?android:attr/selectableItemBackground"
-            android:clickable="true"
-            android:focusable="true"/>
-
-        <TextView
-            android:id="@+id/completed_orders_menu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/completed_orders"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:padding="12dp"
-            android:background="?android:attr/selectableItemBackground"
-            android:clickable="true"
-            android:focusable="true"/>
+            android:focusable="true" />
 
         <TextView
             android:id="@+id/profile_menu"
@@ -161,7 +127,7 @@
             android:padding="12dp"
             android:background="?android:attr/selectableItemBackground"
             android:clickable="true"
-            android:focusable="true"/>
+            android:focusable="true" />
 
         <TextView
             android:id="@+id/logout_menu"
@@ -174,6 +140,8 @@
             android:layout_marginTop="40dp"
             android:background="?android:attr/selectableItemBackground"
             android:clickable="true"
-            android:focusable="true"/>
+            android:focusable="true" />
+
     </LinearLayout>
+
 </androidx.drawerlayout.widget.DrawerLayout>

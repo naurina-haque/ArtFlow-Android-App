@@ -1,36 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DesignSurface">
-    <option name="filePathToZoomLevelMap">
-      <map>
-        <entry key="..\:/Users/Dell/ArtFlow/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2203125" />
-        <entry key="..\:/Users/Dell/ArtFlow/app/src/main/res/drawable/button_background_selector.xml" value="0.2203125" />
-        <entry key="..\:/Users/Dell/ArtFlow/app/src/main/res/drawable/button_gradient.xml" value="1.5107142857142857" />
-        <entry key="..\:/Users/Dell/ArtFlow/app/src/main/res/drawable/button_ripple.xml" value="0.2203125" />
-        <entry key="..\:/Users/Dell/ArtFlow/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2203125" />
-        <entry key="..\:/Users/Dell/ArtFlow/app/src/main/res/drawable/ic_menu.xml" value="0.2203125" />
-        <entry key="..\:/Users/Dell/ArtFlow/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="..\:/Users/Dell/ArtFlow/app/src/main/res/layout/add_artwork.xml" value="0.13507625272331156" />
-        <entry key="..\:/Users/Dell/ArtFlow/app/src/main/res/layout/artistcompletedorders.xml" value="0.17415730337078653" />
-        <entry key="..\:/Users/Dell/ArtFlow/app/src/main/res/layout/artistdashboard.xml" value="0.22" />
-        <entry key="..\:/Users/Dell/ArtFlow/app/src/main/res/layout/artistlogin.xml" value="0.22" />
-        <entry key="..\:/Users/Dell/ArtFlow/app/src/main/res/layout/artistsignup.xml" value="0.22" />
-        <entry key="..\:/Users/Dell/ArtFlow/app/src/main/res/layout/artwork_item.xml" value="0.25" />
-        <entry key="..\:/Users/Dell/ArtFlow/app/src/main/res/layout/completed_order_item.xml" value="0.14447463768115942" />
-        <entry key="..\:/Users/Dell/ArtFlow/app/src/main/res/layout/customerlogin.xml" value="0.22" />
-        <entry key="..\:/Users/Dell/ArtFlow/app/src/main/res/layout/customersignup.xml" value="0.22" />
-        <entry key="..\:/Users/Dell/ArtFlow/app/src/main/res/layout/myartworks.xml" value="0.18" />
-        <entry key="..\:/Users/Dell/ArtFlow/app/src/main/res/layout/order_item.xml" value="0.22" />
-        <entry key="..\:/Users/Dell/ArtFlow/app/src/main/res/layout/select.xml" value="0.25" />
-        <entry key="..\:/Users/Dell/ArtFlow/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.17552083333333332" />
-        <entry key="..\:/Users/Dell/ArtFlow/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.17552083333333332" />
-      </map>
-    </option>
-  </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="jbr-21" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.14304565429687502" />
+      </ProjectState>
+    </option>
   </component>
 </project>

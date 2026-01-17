@@ -14,6 +14,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class CustomerSignup extends AppCompatActivity {
 
@@ -22,6 +24,7 @@ public class CustomerSignup extends AppCompatActivity {
     private TextView loginTextView;
     
     private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,7 @@ public class CustomerSignup extends AppCompatActivity {
         
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance("https://artflow-55038-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference();
 
         // Initialize UI components
         nameEditText = findViewById(R.id.customerNameEdit);
@@ -37,7 +41,7 @@ public class CustomerSignup extends AppCompatActivity {
         passwordEditText = findViewById(R.id.customerPasswordEdit);
         confirmPasswordEditText = findViewById(R.id.customerConfirmPasswordEdit);
         signupButton = findViewById(R.id.customerSignupButton);
-        backButton = findViewById(R.id.customerBackButton);
+        backButton = findViewById(R.id.customerBackButton);  // Added back button
         loginTextView = findViewById(R.id.customerLoginText);
 
         // Set click listeners
@@ -48,6 +52,7 @@ public class CustomerSignup extends AppCompatActivity {
             }
         });
 
+        // Added click listener for back button
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,9 +107,23 @@ public class CustomerSignup extends AppCompatActivity {
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         // Sign up success, update UI with logged-in user's information
-                        Toast.makeText(CustomerSignup.this, "Registration successful.", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(CustomerSignup.this, Select.class));
-                        finish();
+                        String userId = mAuth.getCurrentUser().getUid();
+                        
+                        // Create user profile in database
+                        User userProfile = new User(name, email, ""); // Empty phone initially
+                        mDatabase.child("users").child(userId).setValue(userProfile)
+                                .addOnCompleteListener(profileTask -> {
+                                    if (profileTask.isSuccessful()) {
+                                        Toast.makeText(CustomerSignup.this, "Registration successful.", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(CustomerSignup.this, CustomerDashboard.class));
+                                        finish();
+                                    } else {
+                                        Toast.makeText(CustomerSignup.this, "Registration successful but profile creation failed: " + profileTask.getException().getMessage(),
+                                                Toast.LENGTH_LONG).show();
+                                        startActivity(new Intent(CustomerSignup.this, CustomerDashboard.class));
+                                        finish();
+                                    }
+                                });
                     } else {
                         // If sign up fails, display a message to the user.
                         Toast.makeText(CustomerSignup.this, "Registration failed: " + task.getException().getMessage(),

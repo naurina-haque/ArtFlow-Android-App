@@ -81,7 +81,7 @@ public class CustomerLogin extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
                         Toast.makeText(CustomerLogin.this, "Login successful.", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(CustomerLogin.this, ArtistDashboard.class)); // Note: May want to redirect to customer dashboard
+                        startActivity(new Intent(CustomerLogin.this, CustomerDashboard.class)); // Fixed: Redirect to CustomerDashboard instead of ArtistDashboard
                         finish();
                     } else {
                         // If sign in fails, display a message to the user.

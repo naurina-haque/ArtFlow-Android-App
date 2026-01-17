@@ -3,6 +3,7 @@ package com.example.artflow;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,6 +18,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -25,6 +27,7 @@ import java.util.List;
 public class MyArtworksActivity extends AppCompatActivity {
 
     private static final int ADD_ARTWORK_REQUEST = 1;
+    private static final String TAG = "MyArtworksActivity";
 
     private DrawerLayout drawerLayout;
     private Button addArtworkButton;
@@ -42,6 +45,10 @@ public class MyArtworksActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.myartworks);
 
+        // Initialize Firebase
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance("https://artflow-55038-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference();
+
         // Initialize views
         drawerLayout = findViewById(R.id.drawer_layout);
         addArtworkButton = findViewById(R.id.add_artwork_button);
@@ -53,15 +60,19 @@ public class MyArtworksActivity extends AppCompatActivity {
         profileMenu = findViewById(R.id.profile_menu);
         logoutMenu = findViewById(R.id.logout_menu);
 
+        Log.d(TAG, "Views initialized");
+
         // Initialize RecyclerView for artworks with GridLayoutManager
         artworksRecyclerView = findViewById(R.id.artworks_container);
         // Use 2 columns for grid layout
         artworksRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         
-        // Create sample artwork data
-        // In a real app, this would come from a database or API
-        artworkAdapter = new ArtworkAdapter(createSampleArtworks());
+        // Initialize adapter with empty list
+        artworkAdapter = new ArtworkAdapter(new ArrayList<>());
         artworksRecyclerView.setAdapter(artworkAdapter);
+
+        // Load artworks from Firebase
+        loadArtworksFromFirebase();
 
         // Highlight current page (My Artworks)
         setActiveMenuItem(myArtworksMenu);
@@ -75,14 +86,25 @@ public class MyArtworksActivity extends AppCompatActivity {
         });
 
         // Set click listener for add artwork button
-        addArtworkButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Start AddArtworkActivity
-                Intent intent = new Intent(MyArtworksActivity.this, AddArtworkActivity.class);
-                startActivityForResult(intent, ADD_ARTWORK_REQUEST);
-            }
-        });
+        Log.d(TAG, "Setting click listener for add artwork button");
+        if (addArtworkButton != null) {
+            addArtworkButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d(TAG, "Add artwork button clicked!");
+                    // Start AddArtworkActivity
+                    Intent intent = new Intent(MyArtworksActivity.this, AddArtworkActivity.class);
+                    try {
+                        startActivityForResult(intent, ADD_ARTWORK_REQUEST);
+                        Log.d(TAG, "Intent started successfully");
+                    } catch (Exception e) {
+                        Log.e(TAG, "Error starting AddArtworkActivity: " + e.getMessage(), e);
+                    }
+                }
+            });
+        } else {
+            Log.e(TAG, "addArtworkButton is null!");
+        }
 
         // Set click listeners for menu items
         dashboardMenu.setOnClickListener(new View.OnClickListener() {
@@ -129,9 +151,9 @@ public class MyArtworksActivity extends AppCompatActivity {
         profileMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Navigate to Profile page (you'll need to create this)
-                // setActiveMenuItem(profileMenu);
-                // startActivity(new Intent(MyArtworksActivity.this, ProfileActivity.class));
+                // Navigate to Profile page
+                setActiveMenuItem(profileMenu);
+                startActivity(new Intent(MyArtworksActivity.this, ProfileActivity.class));
                 drawerLayout.closeDrawers();
             }
         });
@@ -150,11 +172,86 @@ public class MyArtworksActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        // Reload artworks when returning to this activity to show any new additions
+        loadArtworksFromFirebase();
+    }
+
+    private void loadArtworksFromFirebase() {
+        String currentUserId = mAuth.getCurrentUser() != null ? mAuth.getCurrentUser().getUid() : null;
+        
+        Log.d(TAG, "Current user ID: " + currentUserId);
+        
+        if (currentUserId != null) {
+            // Reference to artworks for the current artist
+            Query query = mDatabase.child("artworks").orderByChild("artistId").equalTo(currentUserId);
+            
+            query.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    Log.d(TAG, "DataSnapshot received. Children count: " + dataSnapshot.getChildrenCount());
+                    
+                    List<Artwork> artworks = new ArrayList<>();
+                    
+                    for (DataSnapshot artworkSnapshot : dataSnapshot.getChildren()) {
+                        Log.d(TAG, "Processing artwork snapshot: " + artworkSnapshot.getKey());
+                        
+                        Artwork artwork = artworkSnapshot.getValue(Artwork.class);
+                        if (artwork != null) {
+                            Log.d(TAG, "Loaded artwork: " + artwork.getTitle() + ", ID: " + artwork.getId());
+                            artworks.add(artwork);
+                        } else {
+                            Log.d(TAG, "Artwork object was null for snapshot: " + artworkSnapshot.getKey());
+                        }
+                    }
+                    
+                    Log.d(TAG, "Total artworks loaded: " + artworks.size());
+                    
+                    // Update the adapter with loaded artworks
+                    if (artworkAdapter != null) {
+                        artworkAdapter.updateArtworksList(artworks);
+                    } else {
+                        artworkAdapter = new ArtworkAdapter(artworks);
+                        artworksRecyclerView.setAdapter(artworkAdapter);
+                    }
+                    
+                    if (artworks.isEmpty()) {
+                        Log.d(TAG, "No artworks found for user ID: " + currentUserId);
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    // Handle possible errors
+                    Log.e(TAG, "loadArtworks:onCancelled", databaseError.toException());
+                    Log.e(TAG, "Database error code: " + databaseError.getCode());
+                    Log.e(TAG, "Database error details: " + databaseError.getDetails());
+                    Log.e(TAG, "Database error message: " + databaseError.getMessage());
+                    
+                    // Show error message to user
+                    runOnUiThread(() -> {
+                        String errorMessage = "Failed to load artworks: " + databaseError.getMessage();
+                        Log.e(TAG, errorMessage);
+                    });
+                }
+            });
+        } else {
+            Log.e(TAG, "User is not authenticated");
+            // If user is not authenticated, show empty list
+            artworkAdapter = new ArtworkAdapter(new ArrayList<>());
+            artworksRecyclerView.setAdapter(artworkAdapter);
+        }
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        Log.d(TAG, "onActivityResult called, requestCode: " + requestCode + ", resultCode: " + resultCode);
         if (requestCode == ADD_ARTWORK_REQUEST && resultCode == RESULT_OK) {
-            // Refresh the artwork list if needed
-            // In a real app, you would add the newly created artwork to the list
+            // Reload artworks to show the newly added one
+            Log.d(TAG, "Reloading artworks after adding new artwork");
+            loadArtworksFromFirebase();
         }
     }
 
@@ -219,22 +316,6 @@ public class MyArtworksActivity extends AppCompatActivity {
             chip.setBackgroundResource(R.drawable.chip_background);
             chip.setTextColor(0xFF6C179F); // Using the app's purple color
         }
-    }
-
-    // Sample data creation method
-    private java.util.List<Artwork> createSampleArtworks() {
-        java.util.List<Artwork> artworks = new java.util.ArrayList<>();
-        
-        artworks.add(new Artwork("Sunset Landscape", "Landscape Art", "Beautiful sunset over mountains", "$199.99", "landscape"));
-        artworks.add(new Artwork("Portrait of Jane", "Colored Portraits", "Colorful portrait painting", "$149.99", "colored_portraits"));
-        artworks.add(new Artwork("Digital Dreams", "Digital Art", "Modern digital art piece", "$89.99", "digital"));
-        artworks.add(new Artwork("Black & White Portrait", "B&W Portraits", "Classic black and white portrait", "$129.99", "bw_portraits"));
-        artworks.add(new Artwork("Ocean Watercolor", "Watercolor Art", "Peaceful ocean scene in watercolor", "$99.99", "watercolor"));
-        artworks.add(new Artwork("Abstract Colors", "Abstract Art", "Vibrant abstract art piece", "$179.99", "abstract"));
-        artworks.add(new Artwork("City Line Art", "Line Art", "Detailed cityscape in line art style", "$79.99", "line"));
-        artworks.add(new Artwork("Floral Acrylic", "Acrylic Art", "Beautiful floral painting in acrylic", "$159.99", "acrylic"));
-        
-        return artworks;
     }
     
     private void setActiveMenuItem(TextView activeMenu) {

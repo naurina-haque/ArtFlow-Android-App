@@ -8,12 +8,13 @@ public class Artwork {
     private String price;
     private String categoryKey; // Used for filtering
     private String artistId;
+    private String imageUrl; // Firebase Storage download URL
 
     public Artwork() {
         // Default constructor required for calls to DataSnapshot.getValue(Artwork.class)
     }
     
-    public Artwork(String id, String title, String category, String description, String price, String categoryKey, String artistId) {
+    public Artwork(String id, String title, String category, String description, String price, String categoryKey, String artistId, String imageUrl) {
         this.id = id;
         this.title = title;
         this.category = category;
@@ -21,6 +22,15 @@ public class Artwork {
         this.price = price;
         this.categoryKey = categoryKey;
         this.artistId = artistId;
+        this.imageUrl = imageUrl;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     // Getters

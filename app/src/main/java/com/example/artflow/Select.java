@@ -15,8 +15,8 @@ public class Select extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select);
 
-        artistButton = findViewById(R.id.button);
-        customerButton = findViewById(R.id.button2);
+        artistButton = findViewById(R.id.button_artist);
+        customerButton = findViewById(R.id.button_customer);
 
         artistButton.setOnClickListener(new View.OnClickListener() {
             @Override

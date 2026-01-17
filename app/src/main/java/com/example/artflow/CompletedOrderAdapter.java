@@ -1,5 +1,6 @@
 package com.example.artflow;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +20,7 @@ public class CompletedOrderAdapter extends RecyclerView.Adapter<CompletedOrderAd
     @NonNull
     @Override
     public CompletedOrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.completed_order_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.completed_order_card_item, parent, false);
         return new CompletedOrderViewHolder(view);
     }
 
@@ -33,7 +34,7 @@ public class CompletedOrderAdapter extends RecyclerView.Adapter<CompletedOrderAd
         holder.orderedOn.setText(completedOrder.getOrderedOn());
         holder.status.setText(completedOrder.getStatus());
         // Set the status text color to green for completed orders
-        holder.status.setTextColor(holder.itemView.getContext().getResources().getColor(android.R.color.holo_green_dark));
+        holder.status.setTextColor(Color.parseColor("#4CAF50"));
     }
 
     @Override

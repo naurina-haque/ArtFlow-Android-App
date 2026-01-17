@@ -35,26 +35,18 @@
                     android:layout_marginEnd="16dp" />
 
                 <TextView
+                    android:id="@+id/welcome_customer_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/my_artworks"
+                    android:text="@string/welcome_customer"
                     android:textColor="@color/white"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
-
-                <Button
-                    android:id="@+id/add_artwork_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/add_artwork"
-                    android:backgroundTint="@color/white"
-                    android:textColor="@color/purple_dark"
-                    android:layout_marginStart="8dp" />
 
             </LinearLayout>
 
-<!-- Main Content Area -->
+            <!-- Main Content Area -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -62,7 +54,7 @@
                 android:padding="16dp"
                 android:background="@color/white">
 
-                <!--Search Bar -->
+                <!-- Search Bar -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -85,6 +77,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:hint="Search by category, artist name, artwork title..."
+                        android:textColorHint="@color/gray_dark"
                         android:background="@android:color/transparent"
                         android:padding="8dp"
                         android:maxLines="1"/>
@@ -115,7 +108,7 @@
                             android:layout_marginEnd="8dp"
                             android:gravity="center" />
 
-                     <TextView
+                        <TextView
                             android:id="@+id/chip_colored_portraits"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -147,9 +140,9 @@
                             android:background="@drawable/chip_background"
                             android:textColor="@color/purple_primary"
                             android:paddingHorizontal="16dp"
-                         android:paddingVertical="8dp"
-                          android:layout_marginEnd="8dp"
-                           android:gravity="center" />
+                            android:paddingVertical="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:gravity="center" />
 
                         <TextView
                             android:id="@+id/chip_digital"
@@ -161,7 +154,7 @@
                             android:paddingHorizontal="16dp"
                             android:paddingVertical="8dp"
                             android:layout_marginEnd="8dp"
-                           android:gravity="center" />
+                            android:gravity="center" />
 
                         <TextView
                             android:id="@+id/chip_abstract"
@@ -172,8 +165,8 @@
                             android:textColor="@color/purple_primary"
                             android:paddingHorizontal="16dp"
                             android:paddingVertical="8dp"
-android:layout_marginEnd="8dp"
-                           android:gravity="center" />
+                            android:layout_marginEnd="8dp"
+                            android:gravity="center" />
 
                         <TextView
                             android:id="@+id/chip_landscape"
@@ -211,7 +204,7 @@ android:layout_marginEnd="8dp"
                             android:layout_marginEnd="8dp"
                             android:gravity="center" />
 
-              </LinearLayout>
+                    </LinearLayout>
 
                 </HorizontalScrollView>
 
@@ -224,7 +217,7 @@ android:layout_marginEnd="8dp"
 
             </LinearLayout>
 
-</LinearLayout>
+        </LinearLayout>
 
     </ScrollView>
 
@@ -238,7 +231,7 @@ android:layout_marginEnd="8dp"
         android:orientation="vertical"
         android:padding="16dp">
 
-<TextView
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/menu"
@@ -267,34 +260,10 @@ android:layout_marginEnd="8dp"
             android:focusable="true" />
 
         <TextView
-            android:id="@+id/myartworks_menu"
+            android:id="@+id/my_orders_menu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="My Artworks"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:padding="12dp"
-            android:background="?android:attr/selectableItemBackground"
-            android:clickable="true"
-            android:focusable="true" />
-
-        <TextView
-            android:id="@+id/orders_menu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/orders"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:padding="12dp"
-            android:background="?android:attr/selectableItemBackground"
-            android:clickable="true"
-            android:focusable="true" />
-
-        <TextView
-            android:id="@+id/completed_orders_menu"
-            android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-            android:text="@string/completed_orders"
+            android:text="My Orders"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:padding="12dp"
@@ -327,6 +296,6 @@ android:layout_marginEnd="8dp"
             android:clickable="true"
             android:focusable="true" />
 
-</LinearLayout>
+    </LinearLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>
